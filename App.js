@@ -2,17 +2,18 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Constants } from 'expo';
 
-import AuthorRow from "./components/AuthorRow";
+import Card from "./components/Card";
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <AuthorRow
-          fullName={'First Last'}
+      <Card
+          fullname={'First Last'}
           linkText={'Comments'}
           onPressLinkText={() => {
               console.log('Pressed link!');
           }}
+          image={{ uri: 'https://unsplash.it/600/600' }}
       />
     </View>
   );

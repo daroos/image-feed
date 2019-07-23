@@ -2,19 +2,17 @@ import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Constants } from 'expo';
 
-import Card from "./components/Card";
+import CardList from "./components/CardList";
+
+const items = [
+    { id: 0, author: 'Bob Ross' },
+    { id: 1, author: 'Chuck Norris' },
+];
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Card
-          fullname={'First Last'}
-          linkText={'Comments'}
-          onPressLinkText={() => {
-              console.log('Pressed link!');
-          }}
-          image={{ uri: 'https://unsplash.it/600/600' }}
-      />
+      <CardList items={items} />
     </View>
   );
 }

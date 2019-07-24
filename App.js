@@ -26,6 +26,17 @@ export default class App extends React.Component {
         });
     };
 
+    onSubmitComment = (text) => {
+        const { selectedItemId, commentsForItem } = this.state;
+        const comments = commentsForItem[selectedItemId] || [];
+
+        const updated = {
+            ...commentsForItem,
+            [selectedItemId]: [...comments, text],
+        };
+        this.setState({ commentsForItem: updated });
+    };
+
   render() {
       const { commentsForItem, showModal, selectedItemId } = this.state;
 
@@ -42,9 +53,10 @@ export default class App extends React.Component {
                   onRequestClose={this.closeCommentScreen}
               >
                   <Comments
-                      style={styles.container}
+                      style={styles.comments}
                       comments={commentsForItem[selectedItemId] || []}
                       onClose={this.closeCommentScreen}
+                      onSubmitComment={this.onSubmitComment}
                   />
               </Modal>
           </View>
@@ -70,7 +82,7 @@ const styles = StyleSheet.create({
     comments: {
         flex: 1,
         marginTop:
-            Platform.OS === 'ios' && platformVersion < 11
+            Platform.OS === 'android' || platformVersion < 11
                 ? Constants.statusBarHeight
                 : 0,
     },

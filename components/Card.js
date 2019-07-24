@@ -1,63 +1,59 @@
-import { ActivityIndicator, Image, StyleSheet, View } from 'react-native';
-import PropTypes from 'prop-types';
-import React from 'react';
+import { ActivityIndicator, Image, StyleSheet, View } from "react-native";
+import PropTypes from "prop-types";
+import React from "react";
 
-import AuthorRow from './AuthorRow';
+import AuthorRow from "./AuthorRow";
 
 export default class Card extends React.Component {
-    static propTypes = {
-        fullname: PropTypes.string.isRequired,
-        image: Image.propTypes.source.isRequired,
-        linkText: PropTypes.string,
-        onPressLinkText: PropTypes.func,
-    };
+  static propTypes = {
+    fullname: PropTypes.string.isRequired,
+    image: Image.propTypes.source.isRequired,
+    linkText: PropTypes.string,
+    onPressLinkText: PropTypes.func
+  };
 
-    static defaultProps = {
-        linkText: '',
-        onPressLinkText: () => {},
-    };
+  static defaultProps = {
+    linkText: "",
+    onPressLinkText: () => {}
+  };
 
-    state = {
-        loading: true,
-    };
+  state = {
+    loading: true
+  };
 
-    shouldComponentUpdate(nextProps) {
-        return this.props.linkText !== nextProps.linkText;
-    }
+  shouldComponentUpdate(nextProps) {
+    return this.props.linkText !== nextProps.linkText;
+  }
 
-    handleLoad = () => {
-        this.setState({ loading: false });
-    };
+  handleLoad = () => {
+    this.setState({ loading: false });
+  };
 
-    render() {
-        const { fullname, image, linkText, onPressLinkText } = this.props;
-        const { loading } = this.state;
+  render() {
+    const { fullname, image, linkText, onPressLinkText } = this.props;
+    const { loading } = this.state;
 
-        return (
-            <View>
-                <AuthorRow
-                    linkText={linkText}
-                    fullName={fullname}
-                    onPressLinkText={onPressLinkText}
-                />
-                <View style={styles.image}>
-                    {loading && (
-                        <ActivityIndicator style={StyleSheet.absoluteFill} size={'large'} />
-                    )}
-                    <Image
-                        style={styles.image}
-                        source={image}
-                        onLoad={this.handleLoad}
-                    />
-                </View>
-            </View>
-        );
-    }
+    return (
+      <View>
+        <AuthorRow
+          linkText={linkText}
+          fullName={fullname}
+          onPressLinkText={onPressLinkText}
+        />
+        <View style={styles.image}>
+          {loading && (
+            <ActivityIndicator style={StyleSheet.absoluteFill} size={"large"} />
+          )}
+          <Image style={styles.image} source={image} onLoad={this.handleLoad} />
+        </View>
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-    image: {
-        aspectRatio: 1,
-        backgroundColor: 'rgba(0,0,0,0.02)',
-    },
+  image: {
+    aspectRatio: 1,
+    backgroundColor: "rgba(0,0,0,0.02)"
+  }
 });
